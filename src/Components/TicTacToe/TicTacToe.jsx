@@ -40,10 +40,11 @@ function TicTacToe() {
       won(data[8]);
     } else if (data[0] === data[4] && data[4] === data[8] && data[8] !== "") {
       won(data[8]);
-    } else if (data[0] === data[1] && data[1] === data[2] && data[2] !== "") {
-      won(data[2]);
     } else if (data[2] === data[4] && data[4] === data[6] && data[6] !== "") {
       won(data[6]);
+    } else if (!data.includes("")) {
+      titleRef.current.innerHTML = `It's a Draw!`;
+      setLock(true);
     }
   };
   const won = (winner) => {
@@ -55,6 +56,10 @@ function TicTacToe() {
     }
   };
   const reset = () => {
+    const boxes = document.querySelectorAll(".boxes");
+    boxes.forEach((box) => {
+      box.innerHTML = "";
+    });
     setLock(false);
     data = ["", "", "", "", "", "", "", "", ""];
     titleRef.current.innerHTML = "Tic Tac Toe In <span>React</span>";
@@ -132,10 +137,10 @@ function TicTacToe() {
               }}
             ></div>
           </div>
-          <button className="reset" onClick={reset}>
-            Reset
-          </button>
         </div>
+        <button className="reset" onClick={reset}>
+          Reset
+        </button>
       </div>
     </div>
   );
